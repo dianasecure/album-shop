@@ -47,7 +47,7 @@ app.get("/", (req, res) => {
     res.send("Album Shop RESTful API is running!");
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     log(`Server successfully started on port ${PORT}`);
     log('Available endpoints:');
