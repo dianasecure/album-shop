@@ -26,7 +26,7 @@ export default function AlbumDetailPage({ params }) {
       </Link>
 
       <div className="max-w-xl mx-auto bg-orange-50 shadow-lg rounded-lg overflow-hidden">
-        <img src={album.image} alt={album.title} className="w-full object-cover"/>
+        <Image src={album.image} alt={album.title} className="w-full object-cover"/>
         <div className="p-4">
           <h1 className="text-2xl font-bold text-stone-950">{album.title}</h1>
           <p className="text-stone-700">{album.artist} - {album.year}</p>

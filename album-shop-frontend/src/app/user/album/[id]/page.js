@@ -27,7 +27,7 @@ export default function UserAlbumDetailPage() {
       </Link>
       <div className="max-w-xl mx-auto bg-orange-50 shadow-lg rounded-lg overflow-hidden">
         {album.image.length > 0 && (
-          <img src={album.image[0].url} alt={album.title} className="w-full object-cover" />
+          <Image src={album.image[0].url} alt={album.title} className="w-full object-cover" />
         )}
         <div className="p-4">
           <h1 className="text-2xl font-bold text-stone-950">{album.title}</h1>

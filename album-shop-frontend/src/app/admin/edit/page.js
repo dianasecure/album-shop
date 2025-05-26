@@ -22,7 +22,7 @@ export default function EditAlbumPage(){
         {albums.map((album) => (
           <div key={album.id} >
             <div className="p-4 bg-fuchsia-100 rounded-md w-48 h-80 flex flex-col m-2">
-                <img src={album.image} className="w-full h-40 object-cover shadow-md"/>
+                <Image src={album.image} className="w-full h-40 object-cover shadow-md"/>
                 <h2 className="font-sans text-stone-950 font-semibold pt-2">{album.title}</h2> 
                 <p className="text-sm text-stone-950">{album.artist} - {album.year}</p>
                 <p className="text-gray-950">{album.price} $</p>

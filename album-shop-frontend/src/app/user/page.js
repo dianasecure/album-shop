@@ -124,7 +124,7 @@ export default function UserPage() {
                             onClick={() => window.location.href = `/user/album/${album.id}`}
                         >
                             {album.image.length > 0 && (
-                                <img
+                                <Image
                                     src={album.image[0].url}
                                     alt={album.title}
                                     className="w-full h-40 object-cover shadow-xl rounded"

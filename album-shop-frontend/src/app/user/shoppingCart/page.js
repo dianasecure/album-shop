@@ -56,7 +56,7 @@ export default function ShoppingCartPage() {
                         shoppingList.map((album) => (
                             <div key={album.id} className="p-4 bg-fuchsia-100 rounded-md w-48 h-100 flex flex-col">
                                 {album.image.length > 0 && (
-                                    <img
+                                    <Image
                                         src={album.image[0].url}
                                         alt={album.title}
                                         className="w-full h-40 object-cover shadow-xl rounded"
