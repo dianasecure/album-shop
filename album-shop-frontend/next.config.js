@@ -3,31 +3,19 @@ const nextConfig = {
   // Enable static optimization
   output: 'standalone',
   
-  // Aggressive memory optimizations
-  swcMinify: true,
+  // Basic optimizations
   poweredByHeader: false,
-  reactStrictMode: false, // Disable strict mode to reduce memory usage
+  reactStrictMode: false,
   
   // Optimize images
   images: {
     domains: ['localhost'],
     unoptimized: true,
     minimumCacheTTL: 60,
-    formats: ['image/webp'],
   },
   
-  // Reduce memory usage during build
-  experimental: {
-    optimizeCss: true,
-    optimizePackageImports: ['@heroicons/react', 'recharts'],
-    // Disable features that consume more memory
-    serverActions: false,
-    serverComponentsExternalPackages: [],
-  },
-  
-  // Aggressive webpack optimization
+  // Production optimizations
   webpack: (config, { dev, isServer }) => {
-    // Production optimizations
     if (!dev && !isServer) {
       config.optimization = {
         ...config.optimization,
