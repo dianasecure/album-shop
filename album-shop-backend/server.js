@@ -48,6 +48,7 @@ app.get("/", (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
+log(`Environment PORT value: ${process.env.PORT}`);
 app.listen(PORT, () => {
     log(`Server successfully started on port ${PORT}`);
     log('Available endpoints:');
