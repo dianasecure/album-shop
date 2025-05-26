@@ -22,7 +22,7 @@ export function AlbumProvider({ children }) {
   // Load albums when component mounts or filters/sorting changes
   useEffect(() => {
     loadAlbums();
-  }, [filters, sortBy, sortOrder]);
+  }, [loadAlbums]);
 
   // Function to load albums from the API
   const loadAlbums = async () => {

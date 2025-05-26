@@ -1,10 +1,8 @@
 'use client';
 import { useState } from "react";
-import { useAlbums } from "../../../context/AlbumContext";
 import Link from 'next/link'
 
 export default function AddAlbumPage() {
-  const { addAlbum } = useAlbums();
   const [album, setAlbum] = useState({ title: "", artist: "", genre: "", year: "", price:"", format: "CD", image: "", songs: [] });
   const [newSong, setNewSong] = useState({ name: "", duration: "" });
 

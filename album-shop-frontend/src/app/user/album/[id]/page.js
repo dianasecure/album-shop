@@ -4,6 +4,7 @@ import { useAlbums } from '../../../../context/AlbumContext';
 import { useShoppingList } from '../../../../context/ShoppingListContext';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function UserAlbumDetailPage() {
   const { albums } = useAlbums();
@@ -27,7 +28,13 @@ export default function UserAlbumDetailPage() {
       </Link>
       <div className="max-w-xl mx-auto bg-orange-50 shadow-lg rounded-lg overflow-hidden">
         {album.image.length > 0 && (
-          <Image src={album.image[0].url} alt={album.title} className="w-full object-cover" />
+          <Image 
+            src={album.image[0].url} 
+            alt={`Album cover for ${album.title}`}
+            width={200} 
+            height={200} 
+            className="w-48 h-48 object-cover rounded"
+          />
         )}
         <div className="p-4">
           <h1 className="text-2xl font-bold text-stone-950">{album.title}</h1>

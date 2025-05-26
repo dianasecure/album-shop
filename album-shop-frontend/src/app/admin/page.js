@@ -7,11 +7,12 @@ import GenreChart from './charts/page';
 import PriceChart from './charts/PriceChart'; 
 import FormatChart from './charts/FormatChart';
 import Link from 'next/link'
+import Image from 'next/image';
 
 
 export default function AdminPage() {
       
-    const { albums, isRestocking, startRestocking, stopRestocking, error } = useAlbums();
+    const { albums, isRestocking, startRestocking, stopRestocking, error, removeAlbum } = useAlbums();
 
     const [sortOrder, setSortOrder] = useState(""); // Sorting state
     const [selectedGenre, setSelectedGenre] = useState(""); // Genre filter state
@@ -154,14 +155,14 @@ export default function AdminPage() {
                     
                     {currentAlbums.map((album) => (
                     <Link href={`/album/${album.id}`}>
-                        <div key={album.id} className="p-4 bg-fuchsia-100 rounded-md w-48 h-72 flex flex-col">
-                            {album.image.length > 0 && (
-                            <Image
-                                src={album.image[0].url}
-                                alt={album.title}
-                                className="w-full h-40 object-cover shadow-xl rounded"
+                        <div key={album.id} className="p-4 bg-fuchsia-100 rounded-md w-48 h-80 flex flex-col m-2">
+                            <Image 
+                                src={album.image} 
+                                alt={`Album cover for ${album.title}`}
+                                width={100} 
+                                height={100} 
+                                className="w-24 h-24 object-cover rounded"
                             />
-                            )}
                             <h2 className="font-sans text-stone-950 font-semibold pt-2">{album.title}</h2> 
                             <p className="text-sm text-stone-950">{album.artist} - {album.year}</p>
                             <p className="text-sm text-red-900">{album.genre}</p>

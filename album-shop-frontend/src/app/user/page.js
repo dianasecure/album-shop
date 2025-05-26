@@ -1,4 +1,3 @@
-
 'use client';
 import React from 'react';  // Add this import
 import { useState } from "react";
@@ -7,6 +6,7 @@ import { useShoppingList } from '../../context/ShoppingListContext';
 import { useEffect } from "react";
 import { ShoppingListProvider } from '../../context/ShoppingListContext';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function UserPage() {
 

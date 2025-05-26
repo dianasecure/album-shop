@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useAlbums } from '../../../context/AlbumContext';
 import { useEffect } from "react";
 import { ShoppingListProvider } from '../../../context/ShoppingListContext';
+import Image from 'next/image';
 
 export default function ShoppingCartPage() {
 
@@ -59,7 +60,9 @@ export default function ShoppingCartPage() {
                                     <Image
                                         src={album.image[0].url}
                                         alt={album.title}
-                                        className="w-full h-40 object-cover shadow-xl rounded"
+                                        width={100}
+                                        height={100}
+                                        className="w-24 h-24 object-cover rounded"
                                     />
                                 )}
                                 <h2 className="font-sans text-stone-950 font-semibold pt-2">{album.title}</h2> 
