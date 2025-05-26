@@ -12,7 +12,7 @@ import Image from 'next/image';
 
 export default function AdminPage() {
       
-    const { albums, isRestocking, startRestocking, stopRestocking, error, removeAlbum } = useAlbums();
+    const { albums, isRestocking, startRestocking, stopRestocking, error } = useAlbums();
 
     const [sortOrder, setSortOrder] = useState(""); // Sorting state
     const [selectedGenre, setSelectedGenre] = useState(""); // Genre filter state
@@ -35,7 +35,6 @@ export default function AdminPage() {
     const prices = albums.map(album => album.price);
     const maxPrice = Math.max(...prices);
     const minPrice = Math.min(...prices);
-    const avgPrice = prices.reduce((sum, price) => sum + price, 0) / prices.length;
 
     // GOLD - Pagination + CHARTS
     const [currentPage, setCurrentPage] = useState(1);
