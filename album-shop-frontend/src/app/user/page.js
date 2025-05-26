@@ -1,49 +1,46 @@
 'use client';
-import React from 'react';  // Add this import
+import React from 'react';
 import { useState } from "react";
 import { useAlbums } from '../../context/AlbumContext';
 import { useShoppingList } from '../../context/ShoppingListContext';
-import { useEffect } from "react";
-import { ShoppingListProvider } from '../../context/ShoppingListContext';
 import Link from 'next/link';
 import Image from 'next/image';
 
 export default function UserPage() {
-
-  const { albums, isRestocking, startRestocking, stopRestocking, error } = useAlbums();
-   const { shoppingList, addToShoppingList } = useShoppingList();
+  const { albums } = useAlbums();
+  const { addToShoppingList } = useShoppingList();
   
-    const [sortOrder, setSortOrder] = useState(""); // Sorting state
-    const [selectedGenre, setSelectedGenre] = useState(""); // Genre filter state  
-    const [selectedYear, setSelectedYear] = useState(""); // Year filter state
-    const [showAddedId, setShowAddedId] = useState(null); // NEW: Track which album was added
-    
-    // Sort and filter albums
-    const filteredAlbums = albums
-        .filter((album) => (selectedGenre ? album.genre === selectedGenre : true)) // Filter by genre
-        .filter((album) => (selectedYear ? album.year.toString() === selectedYear : true)) // Filter by year
-        .sort((a, b) => {
-        if (sortOrder === "title-asc") return a.title.localeCompare(b.title); // A-Z sort
-        if (sortOrder === "price-asc") return a.price - b.price; // Increasing price sort
-        if (sortOrder === "title-desc") return b.title.localeCompare(a.title); // Z-A sort
-        if (sortOrder === "price-desc") return b.price - a.price; // Descending price sort
-        return 0;
-    });
+  const [sortOrder, setSortOrder] = useState("");
+  const [selectedGenre, setSelectedGenre] = useState("");
+  const [selectedYear, setSelectedYear] = useState("");
+  const [showAddedId, setShowAddedId] = useState(null);
+  
+  // Sort and filter albums
+  const filteredAlbums = albums
+      .filter((album) => (selectedGenre ? album.genre === selectedGenre : true)) // Filter by genre
+      .filter((album) => (selectedYear ? album.year.toString() === selectedYear : true)) // Filter by year
+      .sort((a, b) => {
+      if (sortOrder === "title-asc") return a.title.localeCompare(b.title); // A-Z sort
+      if (sortOrder === "price-asc") return a.price - b.price; // Increasing price sort
+      if (sortOrder === "title-desc") return b.title.localeCompare(a.title); // Z-A sort
+      if (sortOrder === "price-desc") return b.price - a.price; // Descending price sort
+      return 0;
+  });
 
-    // GOLD - Pagination + CHARTS
-    const [currentPage, setCurrentPage] = useState(1);
-    const [albumsPerPage, setAlbumsPerPage] = useState(12); // Default albums per page is 12
+  // GOLD - Pagination + CHARTS
+  const [currentPage, setCurrentPage] = useState(1);
+  const [albumsPerPage, setAlbumsPerPage] = useState(12); // Default albums per page is 12
 
-    const indexOfLastAlbum = currentPage * albumsPerPage;
-    const indexOfFirstAlbum = indexOfLastAlbum - albumsPerPage;
-    const currentAlbums = filteredAlbums.slice(indexOfFirstAlbum, indexOfLastAlbum);
+  const indexOfLastAlbum = currentPage * albumsPerPage;
+  const indexOfFirstAlbum = indexOfLastAlbum - albumsPerPage;
+  const currentAlbums = filteredAlbums.slice(indexOfFirstAlbum, indexOfLastAlbum);
 
-    // Function to handle adding to cart
-    const handleAddToCart = (albumId) => {
-        addToShoppingList(albums.find(album => album.id === albumId));
-        setShowAddedId(albumId);
-        setTimeout(() => setShowAddedId(null), 2000);
-    };
+  // Function to handle adding to cart
+  const handleAddToCart = (albumId) => {
+      addToShoppingList(albums.find(album => album.id === albumId));
+      setShowAddedId(albumId);
+      setTimeout(() => setShowAddedId(null), 2000);
+  };
 
   return (
     <div className="flex justify-between min-h-screen">

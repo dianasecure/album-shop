@@ -1,5 +1,4 @@
 'use client';
-import { useState } from "react";
 import { useAlbums } from "../../../context/AlbumContext";
 import Link from 'next/link'
 import Image from 'next/image';

@@ -1,36 +1,21 @@
 'use client';
 import React from 'react';
-import { useState } from "react";
 import { useShoppingList } from '../../../context/ShoppingListContext';
 import Link from 'next/link';
-import { useAlbums } from '../../../context/AlbumContext';
-import { useEffect } from "react";
-import { ShoppingListProvider } from '../../../context/ShoppingListContext';
 import Image from 'next/image';
 
 export default function ShoppingCartPage() {
-
-    const { shoppingList, removeFromShoppingList, updateQuantity, clearShoppingList } = useShoppingList();
-    const { albums } = useAlbums(); // Fetch albums from context
+    const { shoppingList, removeFromShoppingList, updateQuantity } = useShoppingList();
 
     // Function to handle quantity change
     const handleQuantityChange = (albumId, quantity) => {
         if (quantity < 1) return; // Prevent negative quantities
         updateQuantity(albumId, quantity);
     };
+
     // Function to handle remove button click
     const handleRemove = (albumId) => {
         removeFromShoppingList(albumId);
-    };
-    // Function to handle clear button click
-    const handleClear = () => {
-        clearShoppingList();
-    };
-
-    // Function to handle checkout button click
-    const handleCheckout = () => {
-        // Implement checkout logic here (e.g., redirect to payment page)
-        alert('Proceeding to checkout...');
     };
 
     return (
@@ -91,6 +76,4 @@ export default function ShoppingCartPage() {
             </div>
         </div>
     );
-
-
 }

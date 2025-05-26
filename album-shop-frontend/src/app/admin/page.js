@@ -154,8 +154,8 @@ export default function AdminPage() {
                 <div className="flex flex-wrap gap-2 justify-center items-center p-4 mt-12">
                     
                     {currentAlbums.map((album) => (
-                    <Link href={`/album/${album.id}`}>
-                        <div key={album.id} className="p-4 bg-fuchsia-100 rounded-md w-48 h-80 flex flex-col m-2">
+                    <Link href={`/album/${album.id}`} key={album.id}>
+                        <div className="p-4 bg-fuchsia-100 rounded-md w-48 h-80 flex flex-col m-2">
                             <Image 
                                 src={album.image} 
                                 alt={`Album cover for ${album.title}`}

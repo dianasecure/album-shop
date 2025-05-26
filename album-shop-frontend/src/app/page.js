@@ -10,13 +10,10 @@ export default function Home() {
         <p className="text-xl text-stone-950">Don&apos;t miss out on our exclusive collection</p>
 
         <div className="mt-50">
-
-          <Link href="/user"> <button className="bg-[#634137] text-red-50 hover:text-red-200 py-2 px-4 rounded">Go to user's page</button> </Link>
-          <Link href="/admin"> <button className="bg-[#634137] text-red-50 hover:text-red-200 py-2 px-4 rounded">Go to admin's page</button> </Link>
-
+          <Link href="/user"> <button className="bg-[#634137] text-red-50 hover:text-red-200 py-2 px-4 rounded">Go to user&apos;s page</button> </Link>
+          <Link href="/admin"> <button className="bg-[#634137] text-red-50 hover:text-red-200 py-2 px-4 rounded">Go to admin&apos;s page</button> </Link>
         </div>
-
       </div>
     );
-  }
+}
   

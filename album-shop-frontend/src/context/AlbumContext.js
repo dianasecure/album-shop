@@ -1,6 +1,6 @@
 "use client";
 import React from 'react';
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { fetchAlbums, fetchAlbumById, addAlbum as addAlbumService, updateAlbum as updateAlbumService, deleteAlbum as deleteAlbumService } from '../services/albumService';
@@ -19,29 +19,29 @@ export function AlbumProvider({ children }) {
 
   const router = useRouter();
 
-  // Load albums when component mounts or filters/sorting changes
-  useEffect(() => {
-    loadAlbums();
-  }, [loadAlbums]);
-
   // Function to load albums from the API
-  const loadAlbums = async () => {
+  const loadAlbums = useCallback(async () => {
     setLoading(true);
     setError(null);
     try {
       const data = await fetchAlbums(filters, sortBy, sortOrder);
-      console.log('Fetched albums:', data); // Log the fetched albums
+      console.log('Fetched albums:', data);
       setAlbums(data);
     } catch (err) {
       if (err.message === 'Failed to fetch') {
-        setError('network'); // Network error
+        setError('network');
       } else {
-        setError('server'); // Server error
+        setError('server');
       }
     } finally {
       setLoading(false);
     }
-  };
+  }, [filters, sortBy, sortOrder]);
+
+  // Load albums when component mounts or filters/sorting changes
+  useEffect(() => {
+    loadAlbums();
+  }, [loadAlbums]);
 
   // Function to get a single album by ID
   const getAlbumById = async (id) => {
@@ -160,26 +160,26 @@ const editOneAlbum = async (id, updatedAlbum) => {
 
     if (isRestocking) {
       interval = setInterval(async () => {
-        if (albums.length === 0) return; // Ensure there's at least one album to add
+        if (albums.length === 0) return;
 
-        const randomAlbum = albums[Math.floor(Math.random() * albums.length)]; // Pick a random album
+        const randomAlbum = albums[Math.floor(Math.random() * albums.length)];
         const newAlbum = {
           ...randomAlbum,
-          title: `${randomAlbum.title} (Re-stocked)`, // Indicate it's a restock
-          price: Math.floor(Math.random() * 100) + 10, // Randomize the price a bit
+          title: `${randomAlbum.title} (Re-stocked)`,
+          price: Math.floor(Math.random() * 100) + 10,
         };
 
         try {
           await addAlbumService(newAlbum);
-          await loadAlbums(); // Refresh the albums list
+          await loadAlbums();
         } catch (err) {
           console.error('Error restocking album:', err);
         }
       }, 3000);
     }
 
-    return () => clearInterval(interval); // Clean up on unmount or when stopping
-  }, [isRestocking, albums]);
+    return () => clearInterval(interval);
+  }, [isRestocking, albums, loadAlbums]);
 
   // Functions to start/stop the restocking
   const startRestocking = () => setIsRestocking(true);
