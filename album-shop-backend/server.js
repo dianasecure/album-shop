@@ -4,10 +4,10 @@ import cors from "cors";
 // Debug logging setup
 const DEBUG = true;
 const log = (message, data = null) => {
-    //if (DEBUG) {
-        // console.log(`[DEBUG] ${new Date().toISOString()} - ${message}`);
-        // if (data) console.log(data);
-    //}
+    if (DEBUG) {
+        console.log(`[DEBUG] ${new Date().toISOString()} - ${message}`);
+        if (data) console.log(data);
+    }
 };
 
 log('Initializing Express application...');
