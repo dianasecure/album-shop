@@ -47,12 +47,20 @@ app.get("/", (req, res) => {
     res.send("Album Shop RESTful API is running!");
 });
 
+// Add health check endpoint
+app.get("/health", (req, res) => {
+    res.status(200).json({ status: "healthy" });
+});
+
 const PORT = process.env.PORT || 3000;
 log(`Environment PORT value: ${process.env.PORT}`);
-app.listen(PORT, () => {
+
+// Create server with error handling
+const server = app.listen(PORT, '0.0.0.0', () => {
     log(`Server successfully started on port ${PORT}`);
     log('Available endpoints:');
     log('- GET  /');
+    log('- GET  /health');
     log('- GET  /api/albums');
     log('- POST /api/albums');
     log('- GET  /api/albums/:id');
@@ -61,5 +69,30 @@ app.listen(PORT, () => {
     log('- GET  /api/statistics/album-stats');
 });
 
+// Add error handling
+server.on('error', (error) => {
+    log(`Server error: ${error.message}`);
+    if (error.code === 'EADDRINUSE') {
+        log(`Port ${PORT} is already in use`);
+    }
+    process.exit(1);
+});
+
+// Handle process termination
+process.on('SIGTERM', () => {
+    log('SIGTERM received. Shutting down gracefully...');
+    server.close(() => {
+        log('Server closed');
+        process.exit(0);
+    });
+});
+
+process.on('uncaughtException', (error) => {
+    log(`Uncaught Exception: ${error.message}`);
+    log(error.stack);
+    server.close(() => {
+        process.exit(1);
+    });
+});
 
 export default app;
