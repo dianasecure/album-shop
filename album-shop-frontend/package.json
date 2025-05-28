@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
+    "dev": "next dev",
+    "build": "NODE_OPTIONS='--max_old_space_size=2048' next build",
     "start": "next start",
     "lint": "next lint",
     "test": "jest"
@@ -26,7 +26,7 @@
     "@testing-library/react": "^16.2.0",
     "@testing-library/react-hooks": "^8.0.1",
     "@types/node": "^20",
-    "@types/react": "^18.3.19",
+    "@types/react": "19.1.6",
     "@types/react-dom": "^18.3.5",
     "autoprefixer": "^10.4.21",
     "babel-jest": "^29.7.0",
@@ -36,6 +36,6 @@
     "jest-environment-jsdom": "^29.7.0",
     "postcss": "^8.5.3",
     "tailwindcss": "^4.0.14",
-    "typescript": "^5"
+    "typescript": "5.8.3"
   }
 }
