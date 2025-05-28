@@ -1,8 +1,10 @@
 'use client';
 import { useState } from "react";
+import { useAlbums } from "../../../context/AlbumContext";
 import Link from 'next/link'
 
 export default function AddAlbumPage() {
+  const { addAlbum } = useAlbums();
   const [album, setAlbum] = useState({ title: "", artist: "", genre: "", year: "", price:"", format: "CD", image: "", songs: [] });
   const [newSong, setNewSong] = useState({ name: "", duration: "" });
 
@@ -32,8 +34,7 @@ export default function AddAlbumPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
-    const res = await fetch(`${apiUrl}/api/albums`, {
+    const res = await fetch("http://localhost:5000/api/albums", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(album),

@@ -1,5 +1,5 @@
-// API base URL - use environment variable with fallback
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api/albums';
+// API base URL - change this if your server runs on a different port or host
+const API_URL = 'http://localhost:5000/api/albums';
 
 /**
  * Fetch all albums with optional filtering and sorting

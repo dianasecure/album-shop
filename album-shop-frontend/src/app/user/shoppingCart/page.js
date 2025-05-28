@@ -1,21 +1,35 @@
 'use client';
 import React from 'react';
+import { useState } from "react";
 import { useShoppingList } from '../../../context/ShoppingListContext';
 import Link from 'next/link';
-import Image from 'next/image';
+import { useAlbums } from '../../../context/AlbumContext';
+import { useEffect } from "react";
+import { ShoppingListProvider } from '../../../context/ShoppingListContext';
 
 export default function ShoppingCartPage() {
-    const { shoppingList, removeFromShoppingList, updateQuantity } = useShoppingList();
+
+    const { shoppingList, removeFromShoppingList, updateQuantity, clearShoppingList } = useShoppingList();
+    const { albums } = useAlbums(); // Fetch albums from context
 
     // Function to handle quantity change
     const handleQuantityChange = (albumId, quantity) => {
         if (quantity < 1) return; // Prevent negative quantities
         updateQuantity(albumId, quantity);
     };
-
     // Function to handle remove button click
     const handleRemove = (albumId) => {
         removeFromShoppingList(albumId);
+    };
+    // Function to handle clear button click
+    const handleClear = () => {
+        clearShoppingList();
+    };
+
+    // Function to handle checkout button click
+    const handleCheckout = () => {
+        // Implement checkout logic here (e.g., redirect to payment page)
+        alert('Proceeding to checkout...');
     };
 
     return (
@@ -42,12 +56,10 @@ export default function ShoppingCartPage() {
                         shoppingList.map((album) => (
                             <div key={album.id} className="p-4 bg-fuchsia-100 rounded-md w-48 h-100 flex flex-col">
                                 {album.image.length > 0 && (
-                                    <Image
+                                    <img
                                         src={album.image[0].url}
                                         alt={album.title}
-                                        width={100}
-                                        height={100}
-                                        className="w-24 h-24 object-cover rounded"
+                                        className="w-full h-40 object-cover shadow-xl rounded"
                                     />
                                 )}
                                 <h2 className="font-sans text-stone-950 font-semibold pt-2">{album.title}</h2> 
@@ -76,4 +88,6 @@ export default function ShoppingCartPage() {
             </div>
         </div>
     );
+
+
 }

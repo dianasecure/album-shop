@@ -7,10 +7,9 @@ import GenreChart from './charts/page';
 import PriceChart from './charts/PriceChart'; 
 import FormatChart from './charts/FormatChart';
 import Link from 'next/link'
-import Image from 'next/image';
 
 
-export default function AdminPage() {
+export default function main() {
       
     const { albums, isRestocking, startRestocking, stopRestocking, error } = useAlbums();
 
@@ -35,6 +34,7 @@ export default function AdminPage() {
     const prices = albums.map(album => album.price);
     const maxPrice = Math.max(...prices);
     const minPrice = Math.min(...prices);
+    const avgPrice = prices.reduce((sum, price) => sum + price, 0) / prices.length;
 
     // GOLD - Pagination + CHARTS
     const [currentPage, setCurrentPage] = useState(1);
@@ -153,15 +153,15 @@ export default function AdminPage() {
                 <div className="flex flex-wrap gap-2 justify-center items-center p-4 mt-12">
                     
                     {currentAlbums.map((album) => (
-                    <Link href={`/album/${album.id}`} key={album.id}>
-                        <div className="p-4 bg-fuchsia-100 rounded-md w-48 h-80 flex flex-col m-2">
-                            <Image 
-                                src={album.image} 
-                                alt={`Album cover for ${album.title}`}
-                                width={100} 
-                                height={100} 
-                                className="w-24 h-24 object-cover rounded"
+                    <Link href={`/album/${album.id}`}>
+                        <div key={album.id} className="p-4 bg-fuchsia-100 rounded-md w-48 h-72 flex flex-col">
+                            {album.image.length > 0 && (
+                            <img
+                                src={album.image[0].url}
+                                alt={album.title}
+                                className="w-full h-40 object-cover shadow-xl rounded"
                             />
+                            )}
                             <h2 className="font-sans text-stone-950 font-semibold pt-2">{album.title}</h2> 
                             <p className="text-sm text-stone-950">{album.artist} - {album.year}</p>
                             <p className="text-sm text-red-900">{album.genre}</p>
