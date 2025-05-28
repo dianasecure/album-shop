@@ -8,10 +8,7 @@ const nextConfig = {
   productionBrowserSourceMaps: false,
   // Optimize build output
   output: 'standalone',
-  // Reduce memory usage during build
-  experimental: {
-    optimizePackageImports: ['@testing-library/react', 'recharts'],
-  },
+  // Removed experimental optimizations
 };
 
 module.exports = nextConfig; 
