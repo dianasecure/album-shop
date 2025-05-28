@@ -2,6 +2,7 @@ import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import "@testing-library/jest-dom";
 import { AlbumProvider, useAlbums } from '../../context/AlbumContext'; // Adjust the import path as needed
+import { useRouter } from 'next/navigation';
 
 // Mock Next.js useRouter hook
 jest.mock('next/navigation', () => ({
@@ -47,7 +48,7 @@ describe('Album Context', () => {
     pushMock.mockReset();
 
     // Mock implementation of useRouter to return our mock push function
-    require('next/navigation').useRouter.mockImplementation(() => ({
+    useRouter.mockImplementation(() => ({
       push: pushMock,
     }));
   });

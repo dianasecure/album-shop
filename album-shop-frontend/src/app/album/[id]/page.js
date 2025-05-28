@@ -1,5 +1,5 @@
 'use client';
-import { useRouter, useParams } from 'next/navigation';
+import Image from 'next/image';
 import { useAlbums } from '../../../context/AlbumContext';
 import { useEffect, useState } from 'react';
 import Link from 'next/link'
@@ -7,7 +7,7 @@ import Link from 'next/link'
 export default function AlbumDetailPage({ params }) {
   const { albums } = useAlbums();
   // const router = useRouter();
-  const { id } = useParams();  // Use useParams to get the dynamic id
+  const { id } = params;  // Use params to get the dynamic id
   const [album, setAlbum] = useState(null);
 
   useEffect(() => {
@@ -26,7 +26,13 @@ export default function AlbumDetailPage({ params }) {
       </Link>
 
       <div className="max-w-xl mx-auto bg-orange-50 shadow-lg rounded-lg overflow-hidden">
-        <img src={album.image} alt={album.title} className="w-full object-cover"/>
+        <Image 
+          src={album.image} 
+          alt={`Album cover for ${album.title}`}
+          width={200} 
+          height={200} 
+          className="w-48 h-48 object-cover rounded"
+        />
         <div className="p-4">
           <h1 className="text-2xl font-bold text-stone-950">{album.title}</h1>
           <p className="text-stone-700">{album.artist} - {album.year}</p>
