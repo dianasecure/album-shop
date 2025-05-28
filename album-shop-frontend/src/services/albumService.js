@@ -1,5 +1,6 @@
 // API base URL - change this if your server runs on a different port or host
-const API_URL = 'http://localhost:5000/api/albums';
+const API_BASE_URL = process.env.BACKEND_URL;
+const API_URL = `${API_BASE_URL}/api/albums`;
 
 /**
  * Fetch all albums with optional filtering and sorting
