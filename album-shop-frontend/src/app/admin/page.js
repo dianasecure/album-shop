@@ -3,9 +3,6 @@
 import React from 'react';  
 import { useState } from "react";
 import { useAlbums } from '../../context/AlbumContext';
-import GenreChart from './charts/page';
-import PriceChart from './charts/PriceChart'; 
-import FormatChart from './charts/FormatChart';
 import Link from 'next/link'
 import Image from 'next/image';
 
@@ -210,11 +207,7 @@ export default function AdminPage() {
                     </button>
                 </div>
 
-                <div className="flex flex-row justify-between gap-4 p-4">
-                    <GenreChart />
-                    <PriceChart />
-                    <FormatChart />
-                </div>
+            
 
                 {/* Start/Stop Restock Button */}
                 <button 
