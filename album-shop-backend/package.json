@@ -31,9 +31,10 @@
     "nodemon": "^3.0.3",
     "prisma": "^6.7.0",
     "supertest": "^7.1.0",
-    "ts-node": "^10.9.1"
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.0"
   },
   "prisma": {
-    "seed": "ts-node prisma/populate.ts"
+    "seed": "tsc --project tsconfig.json prisma/populate.ts && node prisma/populate.js"
   }
 }
