@@ -35,6 +35,6 @@
     "typescript": "^5.0.0"
   },
   "prisma": {
-    "seed": "tsc --project tsconfig.json prisma/populate.ts && node prisma/populate.js"
+    "seed": "tsc --project tsconfig.json && node prisma/populate.js"
   }
 }
