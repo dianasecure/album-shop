@@ -13,6 +13,8 @@ const log = (message, data = null) => {
 log('Initializing Express application...');
 const app = express();
 
+console.log("erver is starting on port", process.env.PORT);
+
 // Middleware logging
 app.use((req, res, next) => {
     log(`Incoming ${req.method} request to ${req.url}`);
