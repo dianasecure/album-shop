@@ -1,6 +1,16 @@
 // API base URL - change this if your server runs on a different port or host
-const API_BASE_URL = process.env.BACKEND_URL;
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || process.env.BACKEND_URL;
+
+if (!API_BASE_URL) {
+  console.error('API_BASE_URL is not set in environment variables');
+}
+
 const API_URL = `${API_BASE_URL}/api/albums`;
+
+// Log the API URL in development
+if (process.env.NODE_ENV === 'development') {
+  console.log('API URL:', API_URL);
+}
 
 /**
  * Fetch all albums with optional filtering and sorting

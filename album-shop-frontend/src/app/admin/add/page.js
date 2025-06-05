@@ -32,7 +32,8 @@ export default function AddAlbumPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await fetch("http://localhost:5000/api/albums", {
+    const API_URL = process.env.NEXT_PUBLIC_API_URL || process.env.BACKEND_URL;
+    const res = await fetch(`${API_URL}/api/albums`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(album),
