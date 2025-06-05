@@ -25,9 +25,10 @@ app.use(json()); // Allows JSON body parsing
 log('JSON body parsing middleware enabled');
 
 app.use(cors({
-    origin: 'https://album-shop-frontend-production.up.railway.app', // * In production, replace with your frontend URL
+    origin: process.env.FRONTEND_URL || 'https://album-shop-frontend-production.up.railway.app',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization']
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true
 })); // Handles CORS for frontend requests
 log('CORS middleware configured');
 
