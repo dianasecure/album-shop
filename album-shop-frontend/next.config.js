@@ -13,7 +13,15 @@ const nextConfig = {
   productionBrowserSourceMaps: false,
   // Optimize build output
   output: 'standalone',
-  // Removed experimental optimizations
+  // Configure server
+  experimental: {
+    outputFileTracingRoot: undefined, // This helps with standalone mode
+  },
+  // Ensure proper port handling
+  server: {
+    port: process.env.PORT || 3000,
+    host: '0.0.0.0',
+  },
 };
 
 module.exports = nextConfig; 
